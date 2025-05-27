@@ -35,11 +35,10 @@ pip install requirements.txt
 
 ```bash
 # Run classification with direct prediction
-
-python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=predict --temperature=0.0 --nocache
+python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=predict --temperature=0.0
 
 # Run classification with CoT
-python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=cot --temperature=0.0 --nocache
+python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=cot --temperature=0.0 
 
 # Optimize the classifier
 python dspy_optimizer.py --model=llama3.1:8b --trainset=./trainset.csv --auto=heavy --labeled_demos=5
