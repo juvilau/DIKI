@@ -34,8 +34,12 @@ pip install requirements.txt
 ## Example workflow
 
 ```bash
+# Run classification with direct prediction
+
+python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=predict --temperature=0.0 --nocache
+
 # Run classification with CoT
-python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=cot
+python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=cot --temperature=0.0 --nocache
 
 # Optimize the classifier
 python dspy_optimizer.py --model=llama3.1:8b --trainset=./trainset.csv --auto=heavy --labeled_demos=5
