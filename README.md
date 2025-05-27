@@ -60,3 +60,15 @@ After classification, results are saved in `./results/`:
 `*_confusion_matrix.png`: Confusion matrix image
 
 `*_dspy_history.txt`: DSPy execution trace
+
+## Data Format
+Both training and test sets should be in CSV format with at least the following columns:
+
+`text`: The document text to classify
+
+`label`: Either `sensitive_data` or `public_data`
+
+```csv
+text,label
+"Sample archival document text",sensitive_data
+```
