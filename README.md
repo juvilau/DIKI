@@ -44,7 +44,7 @@ python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --module=c
 python dspy_optimizer.py --model=llama3.1:8b --trainset=./trainset.csv --auto=heavy --labeled_demos=5
 
 # Run classification with optimized program
-python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --optimized=./optimizations/llama31_8b__2505_1422
+python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --optimized=./optimizations/llama31_8b__ddmm_hhmm
 ```
 
 ## Output
