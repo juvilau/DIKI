@@ -70,6 +70,8 @@ def accuracy_metric(example, prediction, trace=None):
 
 def load_data(trainset_path):
     """Load training dataset and split it into training and validation sets."""
+    if not os.path.exists(trainset_path):
+        raise FileNotFoundError(f"Dataset not found: {trainset_path}")
     df = pd.read_csv(trainset_path, sep=',')
     print(f"\nDataset size: {len(df)}")
     print(f"Possible classes: {df['label'].unique()}\n")
