@@ -93,8 +93,6 @@ def make_result_directory(model_name, dataset, optimization, module):
 def load_test_data(dataset_path):
     if not os.path.exists(dataset_path):
         raise FileNotFoundError(f"Dataset not found: {dataset_path}")
-    if not dataset_path.lower().endswith("eng.csv"):
-        raise ValueError(f"Invalid dataset format: {dataset_path}. Dataset must end with 'eng.csv'")
     df = pd.read_csv(dataset_path, sep=',')
     print(f"\nDataset size: {len(df)}")
     print(f"Possible classes: {df['label'].unique()}\n")
