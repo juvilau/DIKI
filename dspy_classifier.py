@@ -75,6 +75,7 @@ def parse_arguments():
 
 
 def make_result_directory(model_name, dataset, optimization, module):
+    """Creates results directory and write metadata about the run to a README.md file."""
     timestamp = datetime.now().strftime('%d%m%H%M')
     model_name_clean = model_name.replace(".", "").replace(":", "")
     folder_name = f"{model_name_clean}_{timestamp}"
@@ -91,6 +92,7 @@ def make_result_directory(model_name, dataset, optimization, module):
 
 
 def load_test_data(dataset_path):
+    """Load test data from a CSV file and return texts and labels."""
     if not os.path.exists(dataset_path):
         raise FileNotFoundError(f"Dataset not found: {dataset_path}")
     df = pd.read_csv(dataset_path, sep=',')
@@ -103,11 +105,13 @@ def load_test_data(dataset_path):
 
 
 def configure_lm(model_name, temperature):
+    """Initialize and configure the language model."""
     lm = dspy.LM(f'ollama_chat/{model_name}', api_base='http://localhost:11434', api_key='', temperature=temperature)
     dspy.settings.configure(lm=lm)
 
 
 def load_classifier(path):
+    """Load a DSPy classifier from the given file path."""
     try:
         return dspy.load(path)
     except FileNotFoundError:
@@ -115,6 +119,7 @@ def load_classifier(path):
 
 
 def plot_confusion_matrix(cm, labels, save_path, model):
+    """Plot and save a confusion matrix as a PNG file."""
     fig, ax = plt.subplots(figsize=(8, 8))
     im = ax.imshow(cm, cmap='Blues')
     #ax.figure.colorbar(im, ax=ax)
@@ -144,12 +149,14 @@ def plot_confusion_matrix(cm, labels, save_path, model):
 
 
 def save_dspy_history(path: str, n: int = 1):
+    """Save the DSPy execution history to a text file."""
     with open(path, "w", encoding="utf-8") as f:
         with contextlib.redirect_stdout(f):
             dspy.inspect_history(n=n)
 
 
 def sklearn_report(X, y, classifier, labels, categories, result_dir, prefix, model):
+    """Generate predictions, evaluation metrics, and save all reports."""
     y_true, y_pred, output, total_time = run_predictions(X, y, classifier, categories)
     report_str, accuracy, cm = generate_reports(y_true, y_pred, labels)
 
@@ -161,6 +168,7 @@ def sklearn_report(X, y, classifier, labels, categories, result_dir, prefix, mod
 
 
 def run_predictions(X, y, classifier, categories):
+    """Run predictions for all samples and collect outputs and timing."""
     y_true, y_pred, output = [], [], []
     start_time = time.time()
     for i, x in tqdm(enumerate(X), total=len(X), desc="Running classifier", unit="sample"):
@@ -181,6 +189,7 @@ def run_predictions(X, y, classifier, categories):
 
 
 def generate_reports(y_true, y_pred, labels):
+    """Generate classification report, accuracy, and confusion matrix."""
     y_true = [label.strip() for label in y_true]
     y_pred = [label.strip() for label in y_pred]
     report = classification_report(y_true, y_pred, labels=labels, zero_division=1, digits=4)
@@ -190,6 +199,7 @@ def generate_reports(y_true, y_pred, labels):
 
 
 def save_reports(report, output, y_true, y_pred, cm, result_dir, prefix, model, total_time):
+    """Save reports, results, errors, and DSPy history to the results directory."""
     avg_time = total_time / len(output) if output else 0
 
     # Save classification report
