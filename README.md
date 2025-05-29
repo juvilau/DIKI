@@ -49,7 +49,7 @@ python dspy_classifier.py --model=llama3.1:8b --dataset=./testset.csv --optimize
 
 ## Output
 
-After classification, results are saved in `./results/`:
+Classification results are saved in `./results/`:
 
 `*_classification_report.txt`: Classification metrics (F1, accuracy, etc.)
 
@@ -62,7 +62,7 @@ After classification, results are saved in `./results/`:
 `*_dspy_history.txt`: DSPy execution trace
 
 ## Data Format
-Both training and test sets should be in CSV format with at least the following columns:
+Both training and test sets should be in CSV format with the following columns:
 
 `text`: The document text to classify
 
