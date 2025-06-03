@@ -4,15 +4,15 @@
 
 A DSPy-based Sensitive Data Classifier for Finnish Archival Documents.
 The classifier is tailored for two categories:
-- **sensitive_data**: Contains personal data or special category data (as defined by the GDPR).
-- **public_data**: Contains no personal data, only public or anonymized information.
+- **sensitive_data** ie. contains personal data or special category data (as defined by the GDPR).
+- **public_data** ie. contains no personal data, only public or anonymized information.
 
 ## Repository Contents
 
 - `dspy_classifier.py`:  
-  Actual classifier. Supports both chain-of-thought and direct prediction modes. 
+  Actual classifier. Supports both chain-of-thought and direct prediction DSPy modules. 
 - `dspy_optimizer.py`:  
-  Optimizes the classifier with MIPROv2. Saves the optimized program for later inference.
+  Optimizes the classifier with MIPROv2. Supports only DSPy chain-of-thought module. Saves the optimized program to ./optimizations/.
 - `utils.py`:  
   Contains the definitions for classification categories and category instructions.
 
