@@ -70,5 +70,5 @@ Both training and test sets should be in CSV format with the following columns:
 
 ```csv
 text,label
-"Sample archival document text",sensitive_data
+"Sample document text",sensitive_data
 ```
